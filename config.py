@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(verbose=True, override=True)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -25,7 +25,7 @@ class DevelopmentConfig(BaseConfig):
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir,
                                                           'data-dev.sqlite')
 

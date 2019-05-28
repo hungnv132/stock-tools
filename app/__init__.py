@@ -20,8 +20,9 @@ mail = Mail()
 
 def create_app(config_name):
     from app.stock import main as main_blue_print
-    from app.stock.models import Exchange
+    # Must import models here for Flask-Migrate detect changes.
     from app.auth.models import User
+    from app.stock.models import Exchange, Industry, Company
 
     app = Flask(__name__)
     app.config.from_object(config[config_name])

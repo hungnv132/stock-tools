@@ -1,13 +1,15 @@
 from app import db
+from sqlalchemy import func
+from sqlalchemy import Column, Integer, DateTime
 
 
 class BaseModel(db.Model):
 
     __abstract__ = True
 
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime,
-                             default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime,
-                              default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
+    id = Column(Integer, primary_key=True)
+    date_created = Column(DateTime,
+                          default=func.current_timestamp())
+    date_modified = Column(DateTime,
+                           default=func.current_timestamp(),
+                           onupdate=func.current_timestamp())
