@@ -1,15 +1,16 @@
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(verbose=True, override=True)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class BaseConfig:
+    TIMEZONE = 'Asia/Ho_Chi_Minh'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[Admin]'
+    FLASKY_MAIL_SENDER = 'Admin <admin@example.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
@@ -25,7 +26,7 @@ class DevelopmentConfig(BaseConfig):
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir,
                                                           'data-dev.sqlite')
 
