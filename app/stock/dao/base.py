@@ -10,7 +10,7 @@ class DataAccessObject(metaclass=ABCMeta):
         raise NotImplemented("You must implement the function"
                              "'find_by_id()")
 
-    def get_or_create(self,  default={}, **params,):
+    def get_or_create(self, default={}, **params,):
         if not self.model:
             raise ValueError("The 'model' property must be not None ")
         created = False
