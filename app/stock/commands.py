@@ -10,7 +10,7 @@ exchange_dao = ExchangeDAO()
 company_dao = CompanyDAO()
 
 
-@stock_cli.command('fetch_companies')
+@stock_cli.command('fetch-companies')
 def fetch_companies_list():
     stock_fetcher = VNDirectFetcher()
     companies_list = stock_fetcher.fetch_companies_list()

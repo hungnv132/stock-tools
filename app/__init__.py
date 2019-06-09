@@ -28,27 +28,30 @@ def create_app(config_name='default'):
 
     from app.stock import main as main_blue_print
     # Must import models here for Flask-Migrate detect changes.
-    load_models()
 
     app = Flask(__name__)
-    app.config.from_object(config[config_name])
-    app.register_blueprint(main_blue_print)
-    register_command_lines(app)
 
-    config[config_name].init_app(app)
+    # push application context manually
+    with app.app_context():
+        app.config.from_object(config[config_name])
+        app.register_blueprint(main_blue_print)
 
-    migrate = Migrate(app, db)
+        register_models()
+        register_command_lines(app)
 
-    # Init apps
-    mail.init_app(app)
-    db.init_app(app)
-    migrate.init_app(app)
+        config[config_name].init_app(app)
+
+        migrate = Migrate(app, db)
+        # Init apps
+        mail.init_app(app)
+        db.init_app(app)
+        migrate.init_app(app)
 
     # attach routes and custom error pages here
     return app
 
 
-def load_models():
+def register_models():
     from app.auth.models import User
     from app.stock.models import Exchange, Industry, Company
 

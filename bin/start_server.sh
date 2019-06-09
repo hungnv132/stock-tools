@@ -1,2 +1,3 @@
-export FLASK_APP=run.py
-python run.py
+exprot FLASK_CONFIG=development
+export FLASK_APP=app
+flask run

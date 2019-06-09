@@ -1,5 +1,6 @@
+
 from app import db
-from sqlalchemy import func
+from app.core.utils import DateTimeUtil
 from sqlalchemy import Column, Integer, DateTime
 
 
@@ -9,7 +10,7 @@ class BaseModel(db.Model):
 
     id = Column(Integer, primary_key=True)
     date_created = Column(DateTime,
-                          default=func.current_timestamp())
+                          default=DateTimeUtil.now)
     date_modified = Column(DateTime,
-                           default=func.current_timestamp(),
-                           onupdate=func.current_timestamp())
+                           default=DateTimeUtil.now,
+                           onupdate=DateTimeUtil.now)

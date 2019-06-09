@@ -1,9 +1,5 @@
 import requests
 from abc import ABCMeta, abstractmethod
-from datetime import datetime
-
-from app.core.utils import date_to_str
-
 
 ALLOWED_METHOD = ['GET', 'POST']
 DEFAULT_HEADERS = {
